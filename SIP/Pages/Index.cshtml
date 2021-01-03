@@ -5,6 +5,20 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <div id="googleMap" style="height:500px;width:100%;"></div>
+    <script>
+
+    function myMap() {
+        var myCenter = new google.maps.LatLng(54.371807, 18.635777);
+        var mapProp = { center: myCenter, zoom: 8, scrollwheel: true, draggable: true, mapTypeId: google.maps.MapTypeId.ROADMAP };
+        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+        var marker = new google.maps.Marker({ position: myCenter });
+        marker.setMap(map);
+    }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCGK96gKE16NyfQi72nVwtFSvVLSpFLrQ&callback=myMap"></script>
+    </fieldset>
 </div>
