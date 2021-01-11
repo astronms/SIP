@@ -1,0 +1,19 @@
+﻿@page "{restaurantId:int}"
+@model SIP.Pages.Restaurants.DetailModel
+@{
+}
+<h2>@Model.Restaurant.Name</h2>
+<div>
+    Id: @Model.Restaurant.Id
+</div>
+<div>
+    Longitude: @Model.Restaurant.Longitude
+</div>
+<div>
+    Latitude: @Model.Restaurant.Latitude
+</div>
+@if (Model.Message != null)
+{
+    <div clas="alert alert-secondary">@Model.Message</div>
+}
+<a asp-page="./List" class="btn btn-light">All Restaurants</a>

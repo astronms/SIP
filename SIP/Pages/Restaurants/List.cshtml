@@ -1,0 +1,39 @@
+﻿@page
+@model SIP.Pages.Restaurants.ListModel
+@{
+}
+<h1>Restaurants</h1>
+<form method="get">
+    <div class="form-group">
+        <div class="input-group">
+            <input type="search" class="form-control" asp-for="SearchTerm" />
+            <button class="btn btn-primary">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </div>
+</form>
+
+<table class="table">
+    @foreach (var restaurant in Model.Restaurants)
+    {
+        <tr>
+            <td>@restaurant.Name</td>
+            <td>@restaurant.Longitude</td>
+            <td>@restaurant.Latitude</td>
+            <td>
+                <a class="btn btn-secondary" asp-page="./Detail" asp-route-restaurantId="@restaurant.Id">
+                    <i class="fas fa-plus"></i>
+                </a>
+            </td>
+            <td>
+                <a class="btn btn-secondary" asp-page="./Edit" asp-route-restaurantId="@restaurant.Id">
+                    <i class="fas fa-edit"></i>
+                </a>
+            </td>
+        </tr>
+    }
+</table>
+<a asp-page=".\Edit" class="btn btn-primary">Add New</a>
+
+<div>@Model.Message</div>

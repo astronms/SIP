@@ -1,0 +1,28 @@
+﻿@page "{restaurantId:int?}"
+@model SIP.Pages.Restaurants.editModel
+@{
+}
+
+<h2>Edi ting @Model.Restaurant.Name</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="Restaurant.Id" />
+    <div class="form-group">
+        <label asp-for="Restaurant.Name"></label>
+        <input asp-for="Restaurant.Name" class="form-control" />
+        <span class="text-danger" asp-validation-for="Restaurant.Name"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Restaurant.Latitude"></label>
+        <input asp-for="Restaurant.Latitude" class="form-control" />
+        <span class="text-danger" asp-validation-for="Restaurant.Latitude"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Restaurant.Longitude"></label>
+        <input asp-for="Restaurant.Longitude" class="form-control" />
+        <span class="text-danger" asp-validation-for="Restaurant.Longitude"></span>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
