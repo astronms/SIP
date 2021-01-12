@@ -1,24 +1,52 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+
+    var City = "";
+
+
 }
 
-<div class="text-center">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!DOCTYPE html>
+<html>
 
-    <div id="googleMap" style="height:500px;width:100%;"></div>
-    <script>
+<head>
+    <meta charset="utf-8" />
+    <title>Add a Movie</title>
+</head>
+<body>
+    <h1>Znajdź burgerownię</h1>
+    <form method="post">
+        <fieldset>
+            <legend>Szukaj</legend>
+            <p>
+                <input type="text" name="city"/>
+                <input type="submit" name="searchButton" value="Szukaj" />
+            </p>
+          
+            <p>
+                <div class="text-center">
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+                    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    function myMap() {
-        var myCenter = new google.maps.LatLng(54.371807, 18.635777);
-        var mapProp = { center: myCenter, zoom: 8, scrollwheel: true, draggable: true, mapTypeId: google.maps.MapTypeId.ROADMAP };
-        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-        var marker = new google.maps.Marker({ position: myCenter });
-        marker.setMap(map);
-    }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCGK96gKE16NyfQi72nVwtFSvVLSpFLrQ&callback=myMap"></script>
-    </fieldset>
-</div>
+                    <div id="googleMap" style="height:500px;width:100%;"></div>
+                    <script>
+
+                        function myMap() {
+                            var myCenter = new google.maps.LatLng(54.371807, 18.635777);
+                            var mapProp = { center: myCenter, zoom: 8, scrollwheel: true, draggable: true, mapTypeId: google.maps.MapTypeId.ROADMAP };
+                            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+                            var marker = new google.maps.Marker({ position: myCenter });
+                            marker.setMap(map);
+                        }
+                    </script>
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7inDNHeEHrSM8D1V3ENK3ATX5uuYM_nw&callback=myMap"></script>
+
+                </div>
+            </p>
+
+        </fieldset>
+    </form>
+</body>
+
+</html>
