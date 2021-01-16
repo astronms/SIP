@@ -34,6 +34,23 @@
                     @:var marker = new google.maps.Marker({ position: markerposition });
                     @:marker.setMap(map);
                 }
+                
+                map.addListener('click', function (e) {
+                    //console.log(e);
+                    addMarker(map, e.latLng);
+                });
+
+
+
+            }
+         
+            function addMarker(map, latLng) {
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: latLng,
+                    draggable: true
+                });
+
 
             }
 

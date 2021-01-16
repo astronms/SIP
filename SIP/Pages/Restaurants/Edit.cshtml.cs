@@ -56,7 +56,7 @@ namespace SIP.Pages.Restaurants
                 _restaurantData.Add(Restaurant);
             }
             _restaurantData.Commit();
-            TempData["Message"] = "Restaurant saved!";
+            TempData["Message"] = "Zapisano Restauracjê!";
             return RedirectToPage("./Detail", new { restaurantId = Restaurant.Id });
         }
 
