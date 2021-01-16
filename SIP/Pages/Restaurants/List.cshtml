@@ -1,8 +1,9 @@
 ﻿@page
+
 @model SIP.Pages.Restaurants.ListModel
 @{
 }
-<h1>Restaurants</h1>
+<h1>Restauracje</h1>
 <form method="get">
     <div class="form-group">
         <div class="input-group">
@@ -13,6 +14,38 @@
         </div>
     </div>
 </form>
+
+<div>
+    <div class="text-center">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <div id="googleMap" style="height:500px;width:100%;"></div>
+        <script>
+
+            function myMap() {
+
+                var myCenter = new google.maps.LatLng(54.371807, 18.635777);
+                var mapProp = { center: myCenter, zoom: 8, scrollwheel: true, draggable: true, mapTypeId: google.maps.MapTypeId.ROADMAP };
+                var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
+                @foreach (var restaurant in Model.Restaurants) {
+                    @:var markerposition = new google.maps.LatLng(@restaurant.Latitude, @restaurant.Longitude);
+                    @:var marker = new google.maps.Marker({ position: markerposition });
+                    @:marker.setMap(map);
+                }
+
+            }
+
+        </script>
+       
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7inDNHeEHrSM8D1V3ENK3ATX5uuYM_nw&callback=myMap"></script>
+
+    </div>
+
+</div>
+
+
 
 <table class="table">
     @foreach (var restaurant in Model.Restaurants)
@@ -34,6 +67,5 @@
         </tr>
     }
 </table>
-<a asp-page=".\Edit" class="btn btn-primary">Add New</a>
+<a asp-page=".\Edit" class="btn btn-primary">Dodaj kolejną!</a>
 
-<div>@Model.Message</div>

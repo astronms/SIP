@@ -16,4 +16,27 @@
 {
     <div clas="alert alert-secondary">@Model.Message</div>
 }
+
+<div>
+    <div class="text-center">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <div id="googleMap" style="height:500px;width:100%;"></div>
+        <script>
+
+                        function myMap() {
+                            var myCenter = new google.maps.LatLng(@Model.Restaurant.Latitude, @Model.Restaurant.Longitude);
+                            var mapProp = { center: myCenter, zoom: 16, scrollwheel: true, draggable: true, mapTypeId: google.maps.MapTypeId.ROADMAP };
+                            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+                            var marker = new google.maps.Marker({ position: myCenter });
+                            marker.setMap(map);
+                        }
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7inDNHeEHrSM8D1V3ENK3ATX5uuYM_nw&callback=myMap"></script>
+
+    </div>
+
+</div>
+
 <a asp-page="./List" class="btn btn-light">All Restaurants</a>
