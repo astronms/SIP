@@ -67,21 +67,22 @@
 <table class="table">
     @foreach (var restaurant in Model.Restaurants)
     {
-        <tr>
-            <td>@restaurant.Name</td>
-            <td>@restaurant.Longitude</td>
-            <td>@restaurant.Latitude</td>
-            <td>
-                <a class="btn btn-secondary" asp-page="./Detail" asp-route-restaurantId="@restaurant.Id">
-                    <i class="fas fa-plus"></i>
-                </a>
-            </td>
-            <td>
-                <a class="btn btn-secondary" asp-page="./Edit" asp-route-restaurantId="@restaurant.Id">
-                    <i class="fas fa-edit"></i>
-                </a>
-            </td>
-        </tr>
+    <tr>
+        <td>@restaurant.Name</td>
+        <td>@restaurant.Address</td>
+        <td>@restaurant.Longitude</td>
+        <td>@restaurant.Latitude</td>
+        <td>
+            <a class="btn btn-secondary" asp-page="./Detail" asp-route-restaurantId="@restaurant.Id">
+                <i class="fa fa-bars"></i>
+            </a>
+        </td>
+        <td>
+            <a class="btn btn-secondary" asp-page="./Edit" asp-route-restaurantId="@restaurant.Id">
+                <i class="fa fa-edit"></i>
+            </a>
+        </td>
+    </tr>
     }
 </table>
 <a asp-page=".\Edit" class="btn btn-primary">Dodaj kolejną!</a>
