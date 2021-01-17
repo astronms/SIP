@@ -31,7 +31,7 @@
 
                 @foreach (var restaurant in Model.Restaurants) {
                     @:var markerposition = new google.maps.LatLng(@restaurant.Latitude, @restaurant.Longitude);
-                    @:var marker = new google.maps.Marker({ position: markerposition });
+                    @:var marker = new google.maps.Marker({ position: markerposition, title: "@restaurant.Name", });
                     @:marker.setMap(map);
                 }
                 
