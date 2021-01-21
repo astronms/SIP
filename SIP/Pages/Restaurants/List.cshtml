@@ -29,21 +29,24 @@
                 var mapProp = { center: myCenter, zoom: 8, scrollwheel: true, draggable: true, mapTypeId: google.maps.MapTypeId.ROADMAP };
                 var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 
-                @foreach (var restaurant in Model.Restaurants) {
+                @foreach (var restaurant in Model.Restaurants)
+                {
                     @:var markerposition = new google.maps.LatLng(@restaurant.Latitude, @restaurant.Longitude);
                     @:var marker = new google.maps.Marker({ position: markerposition, title: "@restaurant.Name", });
                     @:marker.setMap(map);
+                    @:marker.addListener('click', () => { window.open("Detail/@restaurant.Id"); });
                 }
-                
-                map.addListener('click', function (e) {
-                    //console.log(e);
-                    addMarker(map, e.latLng);
-                });
+
+                //map.addListener('click', function (e) {
+                //    //console.log(e);
+                //    addMarker(map, e.latLng);
+                //    //window.open("Detail/2");
+                //});
 
 
 
             }
-         
+
             function addMarker(map, latLng) {
                 var marker = new google.maps.Marker({
                     map: map,
