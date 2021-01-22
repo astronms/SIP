@@ -15,7 +15,7 @@ namespace SIP.Pages
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-        private readonly IRestaurantData _restaurantData; //
+        private readonly IRestaurantData _restaurantData; 
         public static bool IsPost { get; }
 
         public IndexModel(ILogger<IndexModel> logger)
@@ -28,7 +28,7 @@ namespace SIP.Pages
 
         }
 
-        public IEnumerable<Restaurant> Restaurants { get; set; } //
+        public IEnumerable<Restaurant> Restaurants { get; set; } 
 
         [BindProperty]
         public string City { get; set; }
