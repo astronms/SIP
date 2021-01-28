@@ -35,15 +35,11 @@
                     @:var marker = new google.maps.Marker({ position: markerposition, title: "@restaurant.Name", });
                     @:marker.setMap(map);
                     @:marker.addListener('click', () => { window.open("Detail/@restaurant.Id"); });
+
+                    @:google.maps.event.addListener(map, 'click', function (event) {
+                        @:addMarker(map, event.latLng);
+                    @:});
                 }
-
-                //map.addListener('click', function (e) {
-                //    //console.log(e);
-                //    addMarker(map, e.latLng);
-                //    //window.open("Detail/2");
-                //});
-
-
 
             }
 
@@ -53,8 +49,9 @@
                     position: latLng,
                     draggable: true
                 });
-
-
+                var Lat = latLng.lat();
+                var Lng = latLng.lng();
+                window.open("Edit/0/" + Lat + "/" + Lng , "_self");
             }
 
         </script>

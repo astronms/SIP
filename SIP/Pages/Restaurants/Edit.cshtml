@@ -1,9 +1,12 @@
-﻿@page "{restaurantId:int?}"
+﻿@page "{restaurantId:int?}/{restaurantLat?}/{restaurantLng?}"
 @model SIP.Pages.Restaurants.editModel
 @{
 }
 
+
 <h2>Okno Edycji @Model.Restaurant.Name</h2>
+
+<div class="center" id="dvMap"  style="height:500px;width:100%;"> </div>
 
 <form method="post">
     <input type="hidden" asp-for="Restaurant.Id" />
@@ -33,6 +36,39 @@
         <span class="text-danger" asp-validation-for="Restaurant.Description"></span>
     </div>
 
-
     <button type="submit" class="btn btn-primary">Zapisz</button>
 </form>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCV9jnDSFNYrVPOdqVukVUU3WpALVBTTx8&callback=initMap" async defer></script>
+<script type="text/javascript">
+    function initMap() {
+        //map..
+        var map = new google.maps.Map(document.getElementById('dvMap'),  {
+            center: {
+                lat: @Model.Restaurant.Latitude,
+                lng: @Model.Restaurant.Longitude
+            },
+            zoom: 15,
+            scrollwheel: true
+        });
+        //marker..
+        var marker = new google.maps.Marker({
+            position: {
+                lat: @Model.Restaurant.Latitude,
+                lng: @Model.Restaurant.Longitude
+            },
+            map: map,
+            draggable: true
+        });
+
+        //dragend event of marker
+        google.maps.event.addListener(marker, 'dragend', function () {
+            var Lats = marker.getPosition().lat();
+            var Longs = marker.getPosition().lng();
+
+            $('#Lat').val(Lats);
+            $('#Long').val(Longs);
+
+        });
+    }
+</script>

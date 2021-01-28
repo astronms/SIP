@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SIP.Data.Restaurants;
+using Microsoft.AspNetCore.Http;
+using System.Web;
+using System.Collections.Specialized;
 
 namespace SIP.Pages.Restaurants
 {
@@ -15,21 +18,31 @@ namespace SIP.Pages.Restaurants
         private readonly IHtmlHelper _htmlHelper;
         [BindProperty]
         public Restaurant Restaurant { get; set; }
-       
+
+        public System.Collections.Specialized.NameValueCollection QueryString { get; }
+
+        public Microsoft.AspNetCore.Http.QueryString HttpRequest { set;  get; }
+
         public editModel(IRestaurantData restaurantData, IHtmlHelper htmlHelper)
         {
             _restaurantData = restaurantData;
             _htmlHelper = htmlHelper;
         }
-        public IActionResult OnGet(int? restaurantId)
+        public IActionResult OnGet(int? restaurantId, string restaurantLat, string restaurantLng)
         {
-            if (restaurantId.HasValue)
+            if (restaurantId > 0)
             {
                 Restaurant = _restaurantData.GetById(restaurantId.Value);
             }
             else
             {
                 Restaurant = new Restaurant();
+                if (restaurantLat != null || restaurantLng != null) 
+                {
+                    Restaurant.Latitude = restaurantLat;
+                    Restaurant.Longitude = restaurantLng;
+                }
+
             }
             if (Restaurant == null)
             {
@@ -55,10 +68,12 @@ namespace SIP.Pages.Restaurants
             {
                 _restaurantData.Add(Restaurant);
             }
+
             _restaurantData.Commit();
             TempData["Message"] = "Zapisano Restauracjê!";
             return RedirectToPage("./Detail", new { restaurantId = Restaurant.Id });
         }
 
     }
+
 }
