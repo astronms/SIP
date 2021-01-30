@@ -69,5 +69,16 @@ namespace SIP.Data.Restaurants
         {
             return 0;
         }
+
+        public Restaurant Delete(int id)
+        {
+            var restaurant = _restaurants.FirstOrDefault(r => r.Id == id);
+            if (restaurant != null)
+            {
+                _restaurants.Remove(restaurant);
+            }
+
+            return restaurant;
+        }
     }
 }
