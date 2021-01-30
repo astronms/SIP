@@ -5,9 +5,36 @@
 }
 <h1>Restauracje</h1>
 <form method="get">
-    <div class="form-group">
-        <div class="input-group">
-            <input type="search" class="form-control" asp-for="SearchTerm" />
+    <div class="form-group row">
+        <div class="input-group col-4">
+            <label asp-for="SearchName">Nazwa</label>
+            <input type="search" class="form-control" asp-for="SearchName" />
+        </div>
+        <div class="input-group col-4">
+            <label asp-for="SearchAddress">Adres</label>
+            <input type="search" class="form-control" asp-for="SearchAddress" />
+        </div>
+        <div class="input-group col-1">
+            <label asp-for="MinScore">MinScore</label>
+            <select asp-for="MinScore" class="form-control" >
+                <option selected="@(Model.MinScore == 1)">1</option>
+                <option selected="@(Model.MinScore == 2)">2</option>
+                <option selected="@(Model.MinScore == 3)">3</option>
+                <option selected="@(Model.MinScore == 4)">4</option>
+                <option selected="@(Model.MinScore == 5)">5</option>
+            </select>
+        </div>
+        <div class="input-group col-1">
+            <label asp-for="MaxScore">MaxScore</label>
+            <select asp-for="MaxScore" class="form-control">
+                <option selected="@(Model.MaxScore == 5)">5</option>
+                <option selected="@(Model.MaxScore == 4)">4</option>
+                <option selected="@(Model.MaxScore == 3)">3</option>
+                <option selected="@(Model.MaxScore == 2)">2</option>
+                <option selected="@(Model.MaxScore == 1)">1</option>
+            </select>
+        </div>
+        <div class="input-group col-2">
             <button class="btn btn-primary">
                 <i class="fas fa-search"></i>
             </button>
@@ -55,7 +82,7 @@
             }
 
         </script>
-       
+
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7inDNHeEHrSM8D1V3ENK3ATX5uuYM_nw&callback=myMap"></script>
 
     </div>
@@ -65,17 +92,17 @@
 
 
 <table class="table">
-    
+
     <thead>
-    <tr>
-        <td>Nazwa</td>
-        <td>Addres</td>
-        <td>Longitude</td>
-        <td>Latitude</td>
-        <td>Ocena</td>
-        <td>Szczegóły</td>
-        <td>Edytuj</td>
-    </tr>
+        <tr>
+            <td>Nazwa</td>
+            <td>Addres</td>
+            <td>Longitude</td>
+            <td>Latitude</td>
+            <td>Ocena</td>
+            <td>Szczegóły</td>
+            <td>Edytuj</td>
+        </tr>
     </thead>
     @foreach (var restaurant in Model.Restaurants)
     {

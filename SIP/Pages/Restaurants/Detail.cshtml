@@ -21,10 +21,7 @@
 <div>
     Ocena: @Model.Restaurant.Rating
 </div>
-@if (Model.Message != null)
-{
-    <div clas="alert alert-secondary">@Model.Message</div>
-}
+
 
 <div>
     <div class="text-center">
@@ -47,5 +44,10 @@
     </div>
 
 </div>
+@if (Model.Message != null)
+{
+    <div clas="alert alert-dark">@Model.Message</div>
+}
 
 <a asp-page="./List" class="btn btn-light">Powrót do wszystkich restauracji.</a>
+

@@ -7,7 +7,7 @@ namespace SIP.Data.Restaurants
 {
     public interface IRestaurantData
     {
-        IEnumerable<Restaurant> GetRestaurantsByName(string name);
+        IEnumerable<Restaurant> SearchRestaurants(string name, string address, float minScore, float maxScore);
         Restaurant GetById(int id);
         Restaurant Update(Restaurant updatedRestaurant);
         Restaurant Add(Restaurant newRestaurant);

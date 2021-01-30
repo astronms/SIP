@@ -15,18 +15,12 @@ namespace SIP.Pages.Restaurants
     public class editModel : PageModel
     {
         private readonly IRestaurantData _restaurantData;
-        private readonly IHtmlHelper _htmlHelper;
         [BindProperty]
         public Restaurant Restaurant { get; set; }
 
-        public System.Collections.Specialized.NameValueCollection QueryString { get; }
-
-        public Microsoft.AspNetCore.Http.QueryString HttpRequest { set;  get; }
-
-        public editModel(IRestaurantData restaurantData, IHtmlHelper htmlHelper)
+        public editModel(IRestaurantData restaurantData)
         {
             _restaurantData = restaurantData;
-            _htmlHelper = htmlHelper;
         }
         public IActionResult OnGet(int? restaurantId, string restaurantLat, string restaurantLng)
         {

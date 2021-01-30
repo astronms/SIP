@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace SIP.Data.Restaurants
 {
@@ -10,7 +11,6 @@ namespace SIP.Data.Restaurants
         public static List<Restaurant> _restaurants;
         public InMemoryRestaurantData()
         {
-
             _restaurants = new List<Restaurant>()
             {
                 new Restaurant {Id = 1, Name = "Surf Burger Przymorze", Longitude = "18.577656847200338", Latitude = "54.40227314033461", Address = "Kołobrzeska 13, Gdańsk" , Rating = 3.4},
@@ -22,12 +22,20 @@ namespace SIP.Data.Restaurants
                 new Restaurant {Id = 7, Name = "Nasty Burger", Longitude = "18.789172951387496", Latitude = "54.093084407168426",Address = "Słupska 10, Gdańsk" , Rating = 2.4}
             };
         }
-        public IEnumerable<Restaurant> GetRestaurantsByName(string name)
+        public IEnumerable<Restaurant> SearchRestaurants(string name, string address, float minScore, float maxScore)
         {
-            return from r in _restaurants
-                where string.IsNullOrEmpty(name) || r.Name.StartsWith(name)
+            var restaurantsByName= from r in _restaurants
+                where string.IsNullOrEmpty(name) ||  r.Name.Contains(name)
                 orderby r.Name
                 select r;
+            var restaurantsByAddress = from r in restaurantsByName
+                                       where string.IsNullOrEmpty(address) || r.Address.Contains(address)
+                                       select r;
+            var restaurantsByRating = from r in restaurantsByAddress
+                where minScore==0 && maxScore ==0 || r.Rating >= minScore && r.Rating <= maxScore
+                select r;
+
+            return restaurantsByRating;
         }
 
         public Restaurant GetById(int id)
@@ -43,6 +51,8 @@ namespace SIP.Data.Restaurants
                 restaurant.Name = updatedRestaurant.Name;
                 restaurant.Longitude = updatedRestaurant.Longitude;
                 restaurant.Latitude = updatedRestaurant.Latitude;
+                restaurant.Description = updatedRestaurant.Description;
+
             }
 
             return restaurant;

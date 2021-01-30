@@ -13,7 +13,10 @@ namespace SIP.Pages.Restaurants
 
         public string Message { get; set; }
         [BindProperty(SupportsGet = true)]
-        public string SearchTerm { get; set; }
+        public string SearchName { get; set; }
+        public string SearchAddress { get; set; }
+        public int MinScore{ get; set; }
+        public int MaxScore { get; set; }
 
         public IEnumerable<Restaurant> Restaurants { get; set; }
 
@@ -21,12 +24,16 @@ namespace SIP.Pages.Restaurants
         {
             _config = config;
             _restaurantData = restaurantData;
+            _restaurantData = restaurantData;
         }
-        public void OnGet(string searchTerm)
+        public void OnGet(string searchName, string searchAddress, int minScore, int maxScore)
         {
-            SearchTerm = searchTerm;
-            Message = "Hello World! " + _config["Message"];
-            Restaurants = _restaurantData.GetRestaurantsByName(SearchTerm);
+            SearchName = searchName;
+            SearchAddress = searchAddress;
+            MinScore = minScore;
+            MaxScore = maxScore;
+
+            Restaurants = _restaurantData.SearchRestaurants(SearchName, SearchAddress, MinScore, MaxScore);
         }
     }
 }
