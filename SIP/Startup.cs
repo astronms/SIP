@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SIP.Data.Restaurants;
+using Microsoft.AspNetCore.Identity;
 
 namespace SIP
 {
@@ -30,9 +31,8 @@ namespace SIP
             services.AddDbContextPool<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("SIPDb")));
-            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            //services.AddIdentity<IdentityUser, IdentityRole>()
-           //.AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<ApplicationDbContext>();
             //services.AddSingleton<IRestaurantData, InMemoryRestaurantData>();
             services.AddScoped<IRestaurantData, SqlRestaurantData>();
             services.AddRazorPages();

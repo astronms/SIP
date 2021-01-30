@@ -62,13 +62,21 @@
         });
 
         //dragend event of marker
-        google.maps.event.addListener(marker, 'dragend', function () {
-            var Lats = marker.getPosition().lat();
-            var Longs = marker.getPosition().lng();
+        google.maps.event.addListener(marker,
+            'dragend',
+            function() {
+                var lat = marker.getPosition().lat();
+                var lng = marker.getPosition().lng();
 
-            $('#Lat').val(Lats);
-            $('#Long').val(Longs);
+                $('#lat').val(lat);
+                $('#lng').val(lng);
 
-        });
+                if (@Model.Restaurant.Id > 0) {
+                    window.open( @Model.Restaurant.Id, "_self");
+                } else {
+                    window.open("/Restaurants/Edit/0/" + lat + "/" + lng, "_self");
+                }
+
+            });
     }
 </script>
