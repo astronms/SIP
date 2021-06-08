@@ -1,21 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using SIP.Data.Restaurants;
 
-namespace SIP.Data
+namespace SIP
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Rating> Ratings { get; set; }
-
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-        :base(options)
+            : base(options)
         {
-            
         }
     }
 }
