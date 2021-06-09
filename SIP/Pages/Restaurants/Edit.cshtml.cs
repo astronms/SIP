@@ -9,9 +9,11 @@ using SIP.Data.Restaurants;
 using Microsoft.AspNetCore.Http;
 using System.Web;
 using System.Collections.Specialized;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SIP.Pages.Restaurants
 {
+    [Authorize(Roles = "Menager")]
     public class editModel : PageModel
     {
         private readonly IRestaurantData _restaurantData;

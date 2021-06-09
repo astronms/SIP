@@ -8,7 +8,6 @@ namespace SIP.Data.Restaurants
 {
     public class SqlRestaurantData : IRestaurantData
     {
-
         private readonly ApplicationDbContext db;
         public SqlRestaurantData(ApplicationDbContext db)
         {
