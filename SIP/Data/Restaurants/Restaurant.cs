@@ -15,7 +15,7 @@ namespace SIP.Data.Restaurants
         public string Latitude { get; set; }
         public string Longitude { get; set; }
         public string Address { get; set; }
-        public RestaurantType Type { get;set }
+        public RestaurantType Type { get; set; }
         public string Description { get; set; }
         public double Rating { get; set; }
     }
