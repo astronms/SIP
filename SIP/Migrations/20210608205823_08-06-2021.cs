@@ -63,7 +63,6 @@ namespace SIP.Migrations
                 {
                     table.PrimaryKey("PK_Restaurants", x => x.Id);
                 });
-            migrationBuilder.InsertData("Restaurants", "Id", "1", "Name", "test");
 
             migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
