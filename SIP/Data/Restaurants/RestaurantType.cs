@@ -5,7 +5,10 @@ using System.Threading.Tasks;
 
 namespace SIP.Data.Restaurants
 {
-    public class RestaurantType
+    public enum RestaurantType
     {
+        Burgerownia,
+        Pizzeria,
+        Kebab
     }
 }
