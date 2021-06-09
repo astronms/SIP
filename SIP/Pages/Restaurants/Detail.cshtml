@@ -21,7 +21,15 @@
 <div>
     Ocena: @Model.Restaurant.Rating
 </div>
+<div>
+    <a href="" id="fb_share"><img src="https://1.bp.blogspot.com/-Oycat4R9GuE/XHguPKA2ABI/AAAAAAAAIHU/6FiEpQI0oLQkRjqhXh_gITbSwLFFldwLACK4BGAYYCw/s1600/icon%2Bshare%2Bfacebook.png" style="width:80px;height:28px;"/></a>
 
+    <script>
+        window.onload = function () {
+            fb_share.href = 'http://www.facebook.com/share.php?u=' + encodeURIComponent(location.href);
+        }
+    </script>
+</div>
 
 <div>
     <div class="text-center">
@@ -30,16 +38,103 @@
 
         <div id="googleMap" style="height:500px;width:100%;"></div>
         <script>
+            function myMap() {
+                var myCenter = new google.maps.LatLng(@Model.Restaurant.Latitude, @Model.Restaurant.Longitude);
+                            var mapProp = { center: myCenter, zoom: 16, scrollwheel: true, draggable: true, mapTypeId: google.maps.MapTypeId.ROADMAP };
+                            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+                            var marker = new google.maps.Marker({ position: myCenter });
+                            marker.setMap(map);
+                const directionsService = new google.maps.DirectionsService();
+                const directionsRenderer = new google.maps.DirectionsRenderer({
+                    draggable: true,
+                    map,
+                    panel: document.getElementById("right-panel"),
+                });
+                directionsRenderer.addListener("directions_changed", () => {
+                    computeTotalDistance(directionsRenderer.getDirections());
+                });
 
+                displayRoute(
+                    "Gdańsk",
+                    myCenter,
+                    directionsService,
+                    directionsRenderer
+                );
+            }
+
+@*
                         function myMap() {
                             var myCenter = new google.maps.LatLng(@Model.Restaurant.Latitude, @Model.Restaurant.Longitude);
                             var mapProp = { center: myCenter, zoom: 16, scrollwheel: true, draggable: true, mapTypeId: google.maps.MapTypeId.ROADMAP };
                             var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
                             var marker = new google.maps.Marker({ position: myCenter });
                             marker.setMap(map);
+                            const directionsService = new google.maps.DirectionsService();
+                            const directionsRenderer = new google.maps.DirectionsRenderer({
+                                draggable: true,
+                                map,
+                                panel: document.getElementById("right-panel"),
+                            });
+                            directionsRenderer.addListener("directions_changed", () => {
+                                computeTotalDistance(directionsRenderer.getDirections());
+                            });
+                            displayRoute(
+                                55,
+                                55,
+                                directionsService,
+                                directionsRenderer
+                            );
+
+            }*@
+
+            function getDirection(map, latLng) {
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: latLng,
+                    draggable: true
+                });
+                var Lat = latLng.lat();
+                var Lng = latLng.lng();
+
+            }
+
+            function displayRoute(origin, destination, service, display) {
+                service.route(
+                    {
+                        origin: origin,
+                        destination: destination,
+                        travelMode: google.maps.TravelMode.DRIVING,
+                        avoidTolls: true,
+                    },
+                    (result, status) => {
+                        if (status === "OK" && result) {
+                            display.setDirections(result);
+                        } else {
+                            alert("Could not display directions due to: " + status);
                         }
+                    }
+                );
+            }
+
+            function computeTotalDistance(result) {
+                let total = 0;
+                const myroute = result.routes[0];
+
+                if (!myroute) {
+                    return;
+                }
+
+                for (let i = 0; i < myroute.legs.length; i++) {
+                    total += myroute.legs[i].distance.value;
+                }
+                total = total / 1000;
+                document.getElementById("total").innerHTML = total + " km";
+            }
+
+
         </script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7inDNHeEHrSM8D1V3ENK3ATX5uuYM_nw&callback=myMap"></script>
+
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7inDNHeEHrSM8D1V3ENK3ATX5uuYM_nw&callback=myMap"></script>
 
     </div>
 
