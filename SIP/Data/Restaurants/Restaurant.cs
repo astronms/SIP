@@ -11,8 +11,9 @@ namespace SIP.Data.Restaurants
         public int Id { get; set; }
         [Required, StringLength(80)]
         public string Name { get; set; }
-        [Required, StringLength(255)]
+        [RegularExpression(@"^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)"), Required, StringLength(30)]
         public string Latitude { get; set; }
+        [RegularExpression(@"^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)"), Required, StringLength(30)]
         public string Longitude { get; set; }
         public string Address { get; set; }
         public RestaurantType Type { get; set; }
