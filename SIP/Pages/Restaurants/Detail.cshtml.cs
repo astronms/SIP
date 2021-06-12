@@ -31,13 +31,19 @@ namespace SIP.Pages.Restaurants
             return Page();
         }
 
-        public void OnPost()
+        public IActionResult OnPost(int restaurantId)
         {
-
+            Restaurant = _restaurantData.GetById(restaurantId);
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+            return Redirect("http://maps.google.com/maps?saddr=" + Restaurant.Latitude + "," + Restaurant.Longitude +
+                            "&daddr=" + Lat + "," + Lng);
         }
-
+        [BindProperty]
         public float Lat { get; set; }
-        
+        [BindProperty]
         public float Lng { get; set; }
     }
 }
