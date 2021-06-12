@@ -3,89 +3,107 @@
 @{
 }
 <h2>@Model.Restaurant.Name</h2>
-<div>
-    Id: @Model.Restaurant.Id
-</div>
-<div>
-    Miasto: @Model.Restaurant.City
-</div>
-<div>
-    Kod pocztowy: @Model.Restaurant.CityCode
-</div>
-<div>
-    Ulica: @Model.Restaurant.Street
-</div>
-<div>
-    Telefon: @Model.Restaurant.Phone
-</div>
-<div>
-    Długość geograficzna: @Model.Restaurant.Longitude
-</div>
-<div>
-    Szerokość geograficzna: @Model.Restaurant.Latitude
-</div>
-<div>
-    Typ: @Model.Restaurant.Type
-</div>
-<div>
-    Godziny Otwarcia:
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">Dzień</th>
-                <th scope="col">Otwarcie</th>
-                <th scope="col">Zamknięcie</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Poniedziałek</td>
-                <td>@Model.Restaurant.Hours[0].OpenHour</td>
-                <td>@Model.Restaurant.Hours[0].CloseHour</td>
-            </tr>
-            <tr>
-                <td>Wtorek</td>
-                <td>@Model.Restaurant.Hours[1].OpenHour</td>
-                <td>@Model.Restaurant.Hours[1].CloseHour</td>
-            </tr>
-            <tr>
-                <td>Środa</td>
-                <td>@Model.Restaurant.Hours[2].OpenHour</td>
-                <td>@Model.Restaurant.Hours[2].CloseHour</td>
-            </tr>
-            <tr>
-                <td>Środa</td>
-                <td>@Model.Restaurant.Hours[3].OpenHour</td>
-                <td>@Model.Restaurant.Hours[3].CloseHour</td>
-            </tr>
-            <tr>
-                <td>Środa</td>
-                <td>@Model.Restaurant.Hours[4].OpenHour</td>
-                <td>@Model.Restaurant.Hours[4].CloseHour</td>
-            </tr>
-            <tr>
-                <td>Środa</td>
-                <td>@Model.Restaurant.Hours[5].OpenHour</td>
-                <td>@Model.Restaurant.Hours[5].CloseHour</td>
-            </tr>
-            <tr>
-                <td>Środa</td>
-                <td>@Model.Restaurant.Hours[6].OpenHour</td>
-                <td>@Model.Restaurant.Hours[6].CloseHour</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-<div>
-    Opis: @Model.Restaurant.Description
-</div>
-<div>
-    Ocena: @Model.Restaurant.Rating
-</div>
-<div>
-    Strona: <a href="@Model.Restaurant.AdressURL">@Model.Restaurant.Name</a>
-</div>
-
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Id: @Model.Restaurant.Id</td>
+        </tr>
+        <tr>
+            <td>Miasto: @Model.Restaurant.City</td>
+        </tr>
+        <tr>
+            <td>Kod pocztowy: @Model.Restaurant.CityCode</td>
+        </tr>
+        <tr>
+            <td>Ulica: @Model.Restaurant.Street</td>
+        </tr>
+        <tr>
+            <td>Telefon: @Model.Restaurant.Phone</td>
+        </tr>
+        <tr>
+            <td>Długość geograficzna: @Model.Restaurant.Longitude</td>
+        </tr>
+        <tr>
+            <td>Szerokość geograficzna: @Model.Restaurant.Latitude</td>
+        </tr>
+        <tr>
+            <td>Typ: @Model.Restaurant.Type</td>
+        </tr>
+        <tr>
+            <td>
+                Godziny Otwarcia:
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <td scope="col">Dzień</td>
+                            <td scope="col">Otwarcie</td>
+                            <td scope="col">Zamknięcie</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td>Poniedziałek</td>
+                            <td>@Model.Restaurant.Hours[0].OpenHour</td>
+                            <td>@Model.Restaurant.Hours[0].CloseHour</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Wtorek</td>
+                            <td>@Model.Restaurant.Hours[1].OpenHour</td>
+                            <td>@Model.Restaurant.Hours[1].CloseHour</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Środa</td>
+                            <td>@Model.Restaurant.Hours[2].OpenHour</td>
+                            <td>@Model.Restaurant.Hours[2].CloseHour</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Czwartek</td>
+                            <td>@Model.Restaurant.Hours[3].OpenHour</td>
+                            <td>@Model.Restaurant.Hours[3].CloseHour</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Piątek</td>
+                            <td>@Model.Restaurant.Hours[4].OpenHour</td>
+                            <td>@Model.Restaurant.Hours[4].CloseHour</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Sobota</td>
+                            <td>@Model.Restaurant.Hours[5].OpenHour</td>
+                            <td>@Model.Restaurant.Hours[5].CloseHour</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Niedziela</td>
+                            <td>@Model.Restaurant.Hours[6].OpenHour</td>
+                            <td>@Model.Restaurant.Hours[6].CloseHour</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>Opis: @Model.Restaurant.Description</td>
+        </tr>
+        <tr>
+            <td>Ocena: @Model.Restaurant.Rating</td>
+        </tr>
+        <tr>
+            <td>Strona: <a href="@Model.Restaurant.AdressURL">@Model.Restaurant.Name</td>
+        </tr>
+    </tbody>
+</table>
 
 <div>
     <div class="text-center">

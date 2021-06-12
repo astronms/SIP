@@ -55,26 +55,61 @@
         </label>
     </div>
     <div class="form-group">
-        <label asp-for="Restaurant.Hours[0].OpenHour">Poniedziałek otwarcie</label>
-        <input asp-for="Restaurant.Hours[0].OpenHour" class="form-control" />
-        <span class="text-danger" asp-validation-for="Restaurant.Hours[0].OpenHour"></span>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td></td>
+                    <td scope="col">Dzień</td>
+                    <td scope="col">Otwarcie</td>
+                    <td scope="col">Zamknięcie</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td><label>Poniedziałek</label></td>
+                    <td><input asp-for="Restaurant.Hours[0].OpenHour" class="form-control" /><span class="text-danger" asp-validation-for="Restaurant.Hours[0].OpenHour"></span></td>
+                    <td><input asp-for="Restaurant.Hours[0].CloseHour" class="form-control" /><span class="text-danger" asp-validation-for="Restaurant.Hours[0].CloseHour"></span></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><label>Wtorek</label></td>
+                    <td><input asp-for="Restaurant.Hours[1].OpenHour" class="form-control" /><span class="text-danger" asp-validation-for="Restaurant.Hours[1].OpenHour"></span></td>
+                    <td><input asp-for="Restaurant.Hours[1].CloseHour" class="form-control" /><span class="text-danger" asp-validation-for="Restaurant.Hours[1].CloseHour"></span></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><label>Środa</label></td>
+                    <td><input asp-for="Restaurant.Hours[2].OpenHour" class="form-control" /><span class="text-danger" asp-validation-for="Restaurant.Hours[2].OpenHour"></span></td>
+                    <td><input asp-for="Restaurant.Hours[2].CloseHour" class="form-control" /><span class="text-danger" asp-validation-for="Restaurant.Hours[2].CloseHour"></span></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><label>Czwartek</label></td>
+                    <td><input asp-for="Restaurant.Hours[3].OpenHour" class="form-control" /><span class="text-danger" asp-validation-for="Restaurant.Hours[3].OpenHour"></span></td>
+                    <td><input asp-for="Restaurant.Hours[3].CloseHour" class="form-control" /><span class="text-danger" asp-validation-for="Restaurant.Hours[3].CloseHour"></span></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><label>Piątek</label></td>
+                    <td><input asp-for="Restaurant.Hours[4].OpenHour" class="form-control" /><span class="text-danger" asp-validation-for="Restaurant.Hours[4].OpenHour"></span></td>
+                    <td><input asp-for="Restaurant.Hours[4].CloseHour" class="form-control" /><span class="text-danger" asp-validation-for="Restaurant.Hours[4].CloseHour"></span></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><label>Sobota</label></td>
+                    <td><input asp-for="Restaurant.Hours[5].OpenHour" class="form-control" /><span class="text-danger" asp-validation-for="Restaurant.Hours[5].OpenHour"></span></td>
+                    <td><input asp-for="Restaurant.Hours[5].CloseHour" class="form-control" /><span class="text-danger" asp-validation-for="Restaurant.Hours[5].CloseHour"></span></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><label>Niedziela</label></td>
+                    <td><input asp-for="Restaurant.Hours[6].OpenHour" class="form-control" /><span class="text-danger" asp-validation-for="Restaurant.Hours[6].OpenHour"></span></td>
+                    <td><input asp-for="Restaurant.Hours[6].CloseHour" class="form-control" /><span class="text-danger" asp-validation-for="Restaurant.Hours[6].CloseHour"></span></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <div class="form-group">
-        <label asp-for="Restaurant.Hours[0].CloseHour">Poniedziałek zamknięcie</label>
-        <input asp-for="Restaurant.Hours[0].CloseHour" class="form-control" />
-        <span class="text-danger" asp-validation-for="Restaurant.Hours[0].CloseHour"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Restaurant.Hours[1].OpenHour">Wtorek otwarcie</label>
-        <input asp-for="Restaurant.Hours[1].OpenHour" class="form-control" />
-        <span class="text-danger" asp-validation-for="Restaurant.Hours[1].OpenHour"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Restaurant.Hours[1].CloseHour">Wtorek zamknięcie</label>
-        <input asp-for="Restaurant.Hours[1].CloseHour" class="form-control" />
-        <span class="text-danger" asp-validation-for="Restaurant.Hours[1].CloseHour"></span>
-    </div>
-
     <div class="form-group">
         <label asp-for="Restaurant.Description">Opis</label>
         <input asp-for="Restaurant.Description" class="form-control" />
@@ -85,7 +120,6 @@
         <input asp-for="Restaurant.AdressURL" class="form-control" />
         <span class="text-danger" asp-validation-for="Restaurant.AdressURL"></span>
     </div>
-
     <button type="submit" class="btn btn-primary">Zapisz</button>
 </form>
 
