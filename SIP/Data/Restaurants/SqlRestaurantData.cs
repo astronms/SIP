@@ -47,7 +47,7 @@ namespace SIP.Data.Restaurants
                 orderby r.Name
                 select r;
             var restaurantsByAddress = from r in restaurantsByName
-                where string.IsNullOrEmpty(address) || r.Address.Contains(address)
+                where string.IsNullOrEmpty(address) || r.City.Contains(address)
                 select r;
             var restaurantsByRating = from r in restaurantsByAddress
                 where minScore == 0 && maxScore == 0 || r.Rating >= minScore && r.Rating <= maxScore

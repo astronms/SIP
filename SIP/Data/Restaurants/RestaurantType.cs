@@ -10,6 +10,11 @@ namespace SIP.Data.Restaurants
         brak,
         Burgerownia,
         Pizzeria,
-        Kebab
+        Kebab,
+        Shushibar,
+        KuchniaTajska,
+        KuchniaTurecka,
+        KuchaniMeksykańska,
+        KuchniaPolska
     }
 }
