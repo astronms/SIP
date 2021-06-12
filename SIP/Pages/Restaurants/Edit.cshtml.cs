@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace SIP.Pages.Restaurants
 {
-    [Authorize(Roles = "Menager")]
+   /* [Authorize(Roles = "Menager")]*/
     public class editModel : PageModel
     {
         private readonly IRestaurantData _restaurantData;

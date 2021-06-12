@@ -30,5 +30,14 @@ namespace SIP.Pages.Restaurants
             }
             return Page();
         }
+
+        public void OnPost()
+        {
+
+        }
+
+        public float Lat { get; set; }
+        
+        public float Lng { get; set; }
     }
 }

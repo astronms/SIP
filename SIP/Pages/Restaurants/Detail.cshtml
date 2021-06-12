@@ -62,30 +62,6 @@
                 );
             }
 
-@*
-                        function myMap() {
-                            var myCenter = new google.maps.LatLng(@Model.Restaurant.Latitude, @Model.Restaurant.Longitude);
-                            var mapProp = { center: myCenter, zoom: 16, scrollwheel: true, draggable: true, mapTypeId: google.maps.MapTypeId.ROADMAP };
-                            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-                            var marker = new google.maps.Marker({ position: myCenter });
-                            marker.setMap(map);
-                            const directionsService = new google.maps.DirectionsService();
-                            const directionsRenderer = new google.maps.DirectionsRenderer({
-                                draggable: true,
-                                map,
-                                panel: document.getElementById("right-panel"),
-                            });
-                            directionsRenderer.addListener("directions_changed", () => {
-                                computeTotalDistance(directionsRenderer.getDirections());
-                            });
-                            displayRoute(
-                                55,
-                                55,
-                                directionsService,
-                                directionsRenderer
-                            );
-
-            }*@
 
             function getDirection(map, latLng) {
                 var marker = new google.maps.Marker({
@@ -143,6 +119,20 @@
 {
     <div class="alert alert-secondary">@Model.Message</div>
 }
+
+<form method="post" target="_blank" action="http://maps.google.com/maps?saddr=+@Model.Restaurant.Latitude,@Model.Restaurant.Longitude&daddr=@Model.Lat,@Model.Lng">
+    <div class="form-group">
+        <label asp-for="@Model.Lat">Szerokość Geograficzna</label>
+        <input asp-for="@Model.Lat" class="form-control"/>
+        <span class="text-danger" asp-validation-for="@Model.Lat"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Lng">Długość Geigraficzna</label>
+        <input asp-for="@Model.Lng" class="form-control" />
+        <span class="text-danger" asp-validation-for="@Model.Lng"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Wyznacz trasę</button>
+</form>
 
 <a asp-page="./List" class="btn btn-light">Powrót do wszystkich restauracji.</a>
 
