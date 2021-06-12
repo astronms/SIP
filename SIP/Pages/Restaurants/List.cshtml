@@ -64,7 +64,7 @@
                     @:marker.addListener('click', () => { window.open("Detail/@restaurant.Id"); });
 
                     @:google.maps.event.addListener(map, 'click', function (event) {
-                        @:addMarker(map, event.latLng);
+                    @:addMarker(map, event.latLng);
                     @:});
                 }
 
