@@ -44,7 +44,7 @@
                             var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
                             var marker = new google.maps.Marker({ position: myCenter });
                             marker.setMap(map);
-                const directionsService = new google.maps.DirectionsService();
+               @* const directionsService = new google.maps.DirectionsService();
                 const directionsRenderer = new google.maps.DirectionsRenderer({
                     draggable: true,
                     map,
@@ -55,14 +55,14 @@
                 });
 
                 displayRoute(
-                    "Gdańsk",
+                    @Model.Lat,
                     myCenter,
                     directionsService,
                     directionsRenderer
-                );
+                );*@
             }
 
-
+@*
             function getDirection(map, latLng) {
                 var marker = new google.maps.Marker({
                     map: map,
@@ -105,7 +105,7 @@
                 }
                 total = total / 1000;
                 document.getElementById("total").innerHTML = total + " km";
-            }
+            }*@
 
 
         </script>
@@ -120,17 +120,18 @@
     <div class="alert alert-secondary">@Model.Message</div>
 }
 
-<form method="post">
+<form method="post" target="_blank">
+    <div class="form-group">
+        <label asp-for="@Model.Lng">Długość Geograficzna</label>
+        <input asp-for="@Model.Lng" class="form-control" />
+        <span class="text-danger" asp-validation-for="@Model.Lng"></span>
+    </div>
     <div class="form-group">
         <label asp-for="@Model.Lat">Szerokość Geograficzna</label>
         <input asp-for="@Model.Lat" class="form-control"/>
         <span class="text-danger" asp-validation-for="@Model.Lat"></span>
     </div>
-    <div class="form-group">
-        <label asp-for="@Model.Lng">Długość Geigraficzna</label>
-        <input asp-for="@Model.Lng" class="form-control" />
-        <span class="text-danger" asp-validation-for="@Model.Lng"></span>
-    </div>
+    
     <button type="submit" class="btn btn-primary">Wyznacz trasę</button>
 </form>
 

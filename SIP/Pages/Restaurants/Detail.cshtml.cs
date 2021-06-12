@@ -38,12 +38,12 @@ namespace SIP.Pages.Restaurants
             {
                 return Page();
             }
-            return Redirect("http://maps.google.com/maps?saddr=" + Restaurant.Latitude + "," + Restaurant.Longitude +
-                            "&daddr=" + Lat + "," + Lng);
+            return Redirect("http://maps.google.com/maps?saddr=" + Lat + "," + Lng +
+                            "&daddr=" + Restaurant.Latitude + "," + Restaurant.Longitude);
         }
         [BindProperty]
-        public float Lat { get; set; }
+        public string Lat { get; set; }
         [BindProperty]
-        public float Lng { get; set; }
+        public string Lng { get; set; }
     }
 }
