@@ -7,6 +7,7 @@ namespace SIP.Data.Restaurants
 {
     public enum RestaurantType
     {
+        brak,
         Burgerownia,
         Pizzeria,
         Kebab

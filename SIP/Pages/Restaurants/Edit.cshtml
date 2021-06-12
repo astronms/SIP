@@ -34,10 +34,9 @@
     <div class="form-group">
         <label asp-for="Restaurant.Type">Type</label>
         <label asp-for="Restaurant.Type" class="form-control">
-            <select asp-for="RestaurantType" asp-items="Html.GetEnumSelectList<RestaurantType>()">
+            <select asp-for="Restaurant.Type" asp-items="Html.GetEnumSelectList<RestaurantType>()">
                 <option value="">Wybierz typ restauracji</option>
             </select>
-
         </label>
     </div>
     <div class="form-group">

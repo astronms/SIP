@@ -21,8 +21,6 @@ namespace SIP.Pages.Restaurants
         [BindProperty]
         public Restaurant Restaurant { get; set; }
 
-        public RestaurantType RestaurantType { get; set; }
-
         public editModel(IRestaurantData restaurantData)
         {
             _restaurantData = restaurantData;
