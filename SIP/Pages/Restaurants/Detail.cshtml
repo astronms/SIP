@@ -120,7 +120,7 @@
     <div class="alert alert-secondary">@Model.Message</div>
 }
 
-<form method="post" target="_blank" action="http://maps.google.com/maps?saddr=+@Model.Restaurant.Latitude,@Model.Restaurant.Longitude&daddr=@Model.Lat,@Model.Lng">
+<form method="post" target="_blank" action="http://maps.google.com/maps?saddr=@Model.Restaurant.Latitude,@Model.Restaurant.Longitude&daddr=@Model.Lat,@Model.Lng">
     <div class="form-group">
         <label asp-for="@Model.Lat">Szerokość Geograficzna</label>
         <input asp-for="@Model.Lat" class="form-control"/>
