@@ -30,5 +30,20 @@ namespace SIP.Pages.Restaurants
             }
             return Page();
         }
+
+        public IActionResult OnPost(int restaurantId)
+        {
+            Restaurant = _restaurantData.GetById(restaurantId);
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+            return Redirect("http://maps.google.com/maps?saddr=" + Lat + "," + Lng +
+                            "&daddr=" + Restaurant.Latitude + "," + Restaurant.Longitude);
+        }
+        [BindProperty]
+        public string Lat { get; set; }
+        [BindProperty]
+        public string Lng { get; set; }
     }
 }

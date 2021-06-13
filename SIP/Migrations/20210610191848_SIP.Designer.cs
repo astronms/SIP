@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SIP;
 
 namespace SIP.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210610191848_SIP")]
+    partial class SIP
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -246,13 +248,7 @@ namespace SIP.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AdressURL")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CityCode")
+                    b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
@@ -260,28 +256,19 @@ namespace SIP.Migrations
 
                     b.Property<string>("Latitude")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Longitude")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(80)
                         .HasColumnType("nvarchar(80)");
 
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<double>("Rating")
                         .HasColumnType("float");
-
-                    b.Property<string>("Street")
-                        .HasColumnType("nvarchar(max)");
-
 
                     b.Property<int>("Type")
                         .HasColumnType("int");
@@ -289,29 +276,6 @@ namespace SIP.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Restaurants");
-                });
-
-            modelBuilder.Entity("SIP.Data.Restaurants.RestaurantHours", b =>
-                {
-                    b.Property<int>("DayId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CloseHour")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OpenHour")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("RestaurantId")
-                        .HasColumnType("int");
-
-                    b.HasKey("DayId");
-
-                    b.HasIndex("RestaurantId");
-
-                    b.ToTable("RestaurantHours");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -372,18 +336,6 @@ namespace SIP.Migrations
                         .HasForeignKey("RestaurantId");
 
                     b.Navigation("Restaurant");
-                });
-
-            modelBuilder.Entity("SIP.Data.Restaurants.RestaurantHours", b =>
-                {
-                    b.HasOne("SIP.Data.Restaurants.Restaurant", null)
-                        .WithMany("Hours")
-                        .HasForeignKey("RestaurantId");
-                });
-
-            modelBuilder.Entity("SIP.Data.Restaurants.Restaurant", b =>
-                {
-                    b.Navigation("Hours");
                 });
 #pragma warning restore 612, 618
         }
