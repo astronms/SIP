@@ -99,7 +99,28 @@
             <td>Opis: @Model.Restaurant.Description</td>
         </tr>
         <tr>
-            <td>Ocena: @Model.Restaurant.Rating</td>
+            <td>Ocena: @Model.RestaurantRate / @Model.RestaurantNumberOfRates</td>
+            <td>
+                @if (Model.IsUserLogged)
+                {
+                    <form method="post">
+                        <input type="hidden" asp-for="Rating.Id" />
+                        <input type="hidden" asp-for="Rating.RestaurantId" />
+                        <input type="hidden" asp-for="Rating.UserId" />
+
+                        <select asp-for="Rating.Score">
+                            <option value="0">Ocena</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+
+                        <button type="submit" class="btn btn-primary">Dodaj</button>
+                    </form>
+                }
+            </td>
         </tr>
         <tr>
             <td>Strona: <a href="@Model.Restaurant.AdressURL">@Model.Restaurant.Name</td>
@@ -107,7 +128,7 @@
     </tbody>
 </table>
 <div>
-    <a href="" id="fb_share"><img src="https://1.bp.blogspot.com/-Oycat4R9GuE/XHguPKA2ABI/AAAAAAAAIHU/6FiEpQI0oLQkRjqhXh_gITbSwLFFldwLACK4BGAYYCw/s1600/icon%2Bshare%2Bfacebook.png" style="width:80px;height:28px;"/></a>
+    <a href="" id="fb_share"><img src="https://1.bp.blogspot.com/-Oycat4R9GuE/XHguPKA2ABI/AAAAAAAAIHU/6FiEpQI0oLQkRjqhXh_gITbSwLFFldwLACK4BGAYYCw/s1600/icon%2Bshare%2Bfacebook.png" style="width:80px;height:28px;" /></a>
 
     <script>
         window.onload = function () {
@@ -214,12 +235,49 @@
     </div>
     <div class="form-group">
         <label asp-for="@Model.Lat">Szerokość Geograficzna</label>
-        <input asp-for="@Model.Lat" class="form-control"/>
+        <input asp-for="@Model.Lat" class="form-control" />
         <span class="text-danger" asp-validation-for="@Model.Lat"></span>
     </div>
-    
+
     <button type="submit" class="btn btn-primary">Wyznacz trasę</button>
 </form>
 
+@if (Model.IsUserLogged)
+{
+    <form method="post">
+        <input type="hidden" asp-for="Comment.Id" />
+        <input type="hidden" asp-for="Comment.UserName" />
+        <input type="hidden" asp-for="Comment.RestaurantId" />
+
+        <div class="form-group">
+            <label asp-for="Comment.Text">Dodaj Komentarz:</label>
+            <input asp-for="Comment.Text" class="form-control" />
+            <span class="text-danger" asp-validation-for="Comment.Text"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Dodaj</button>
+    </form>
+}
+
+
+@if (Model.Comments.Count() > 0)
+{
+    <table class="table">
+
+        <thead>
+            <tr>
+                <td>Uzytkownik</td>
+                <td>Komentarz</td>
+            </tr>
+        </thead>
+        @foreach (var comment in Model.Comments)
+        {
+            <tr>
+                <td>@comment.UserName</td>
+                <td>@comment.Text</td>
+            </tr>
+        }
+    </table>
+}
 <a asp-page="./List" class="btn btn-light">Powrót do wszystkich restauracji.</a>
 

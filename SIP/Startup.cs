@@ -39,6 +39,8 @@ namespace SIP
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
             services.AddScoped<IRestaurantData, SqlRestaurantData>();
+            services.AddScoped<ICommentData, SqlCommentData>();
+            services.AddScoped<IRatingData, SqlRatingData>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
