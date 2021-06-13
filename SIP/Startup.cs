@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SIP.Data.Restaurants;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 
 namespace SIP
 {
@@ -39,6 +40,9 @@ namespace SIP
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
             services.AddScoped<IRestaurantData, SqlRestaurantData>();
+            services.AddScoped<ICommentData, SqlCommentData>();
+            services.AddScoped<IRatingData, SqlRatingData>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
