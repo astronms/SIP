@@ -1,12 +1,13 @@
 ﻿@page "{restaurantId:int?}/{restaurantLat?}/{restaurantLng?}"
 @model SIP.Pages.Restaurants.editModel
+@using SIP.Data.Restaurants
 @{
-}
 
+}
 
 <h2>Okno Edycji @Model.Restaurant.Name</h2>
 
-<div class="center" id="dvMap"  style="height:500px;width:100%;"> </div>
+<div class="center" id="dvMap" style="height:500px;width:100%;"> </div>
 
 <form method="post">
     <input type="hidden" asp-for="Restaurant.Id" />
@@ -26,57 +27,184 @@
         <span class="text-danger" asp-validation-for="Restaurant.Longitude"></span>
     </div>
     <div class="form-group">
-        <label asp-for="Restaurant.Address">Adres</label>
-        <input asp-for="Restaurant.Address" class="form-control" />
-        <span class="text-danger" asp-validation-for="Restaurant.Address"></span>
+        <label asp-for="Restaurant.City">Miasto</label>
+        <input asp-for="Restaurant.City" class="form-control" />
+        <span class="text-danger" asp-validation-for="Restaurant.City"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Restaurant.CityCode">Kod pocztowy</label>
+        <input asp-for="Restaurant.CityCode" class="form-control" />
+        <span class="text-danger" asp-validation-for="Restaurant.CityCode"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Restaurant.Street">Ulica</label>
+        <input asp-for="Restaurant.Street" class="form-control" />
+        <span class="text-danger" asp-validation-for="Restaurant.Street"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Restaurant.Phone">Telefon</label>
+        <input asp-for="Restaurant.Phone" class="form-control" />
+        <span class="text-danger" asp-validation-for="Restaurant.Phone"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Restaurant.Type">Typ</label>
+        <label asp-for="Restaurant.Type" class="form-control">
+            <select asp-for="Restaurant.Type" asp-items="Html.GetEnumSelectList<RestaurantType>()">
+                <option value="">Wybierz typ restauracji</option>
+            </select>
+        </label>
+    </div>
+    <div class="form-group">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td></td>
+                    <td scope="col">Dzień</td>
+                    <td scope="col">Otwarcie</td>
+                    <td scope="col">Zamknięcie</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td><label>Poniedziałek</label></td>
+                    <td><input asp-for="Restaurant.Hours[0].OpenHour" class="form-control" /><span class="text-danger" asp-validation-for="Restaurant.Hours[0].OpenHour"></span></td>
+                    <td><input asp-for="Restaurant.Hours[0].CloseHour" class="form-control" /><span class="text-danger" asp-validation-for="Restaurant.Hours[0].CloseHour"></span></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><label>Wtorek</label></td>
+                    <td><input asp-for="Restaurant.Hours[1].OpenHour" class="form-control" /><span class="text-danger" asp-validation-for="Restaurant.Hours[1].OpenHour"></span></td>
+                    <td><input asp-for="Restaurant.Hours[1].CloseHour" class="form-control" /><span class="text-danger" asp-validation-for="Restaurant.Hours[1].CloseHour"></span></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><label>Środa</label></td>
+                    <td><input asp-for="Restaurant.Hours[2].OpenHour" class="form-control" /><span class="text-danger" asp-validation-for="Restaurant.Hours[2].OpenHour"></span></td>
+                    <td><input asp-for="Restaurant.Hours[2].CloseHour" class="form-control" /><span class="text-danger" asp-validation-for="Restaurant.Hours[2].CloseHour"></span></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><label>Czwartek</label></td>
+                    <td><input asp-for="Restaurant.Hours[3].OpenHour" class="form-control" /><span class="text-danger" asp-validation-for="Restaurant.Hours[3].OpenHour"></span></td>
+                    <td><input asp-for="Restaurant.Hours[3].CloseHour" class="form-control" /><span class="text-danger" asp-validation-for="Restaurant.Hours[3].CloseHour"></span></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><label>Piątek</label></td>
+                    <td><input asp-for="Restaurant.Hours[4].OpenHour" class="form-control" /><span class="text-danger" asp-validation-for="Restaurant.Hours[4].OpenHour"></span></td>
+                    <td><input asp-for="Restaurant.Hours[4].CloseHour" class="form-control" /><span class="text-danger" asp-validation-for="Restaurant.Hours[4].CloseHour"></span></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><label>Sobota</label></td>
+                    <td><input asp-for="Restaurant.Hours[5].OpenHour" class="form-control" /><span class="text-danger" asp-validation-for="Restaurant.Hours[5].OpenHour"></span></td>
+                    <td><input asp-for="Restaurant.Hours[5].CloseHour" class="form-control" /><span class="text-danger" asp-validation-for="Restaurant.Hours[5].CloseHour"></span></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><label>Niedziela</label></td>
+                    <td><input asp-for="Restaurant.Hours[6].OpenHour" class="form-control" /><span class="text-danger" asp-validation-for="Restaurant.Hours[6].OpenHour"></span></td>
+                    <td><input asp-for="Restaurant.Hours[6].CloseHour" class="form-control" /><span class="text-danger" asp-validation-for="Restaurant.Hours[6].CloseHour"></span></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <div class="form-group">
         <label asp-for="Restaurant.Description">Opis</label>
         <input asp-for="Restaurant.Description" class="form-control" />
         <span class="text-danger" asp-validation-for="Restaurant.Description"></span>
     </div>
-
+    <div class="form-group">
+        <label asp-for="Restaurant.AdressURL">Strona internetowa</label>
+        <input asp-for="Restaurant.AdressURL" class="form-control" />
+        <span class="text-danger" asp-validation-for="Restaurant.AdressURL"></span>
+    </div>
     <button type="submit" class="btn btn-primary">Zapisz</button>
 </form>
 
+
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyA7inDNHeEHrSM8D1V3ENK3ATX5uuYM_nw&callback=initMap" async defer></script>
-<script type="text/javascript">
-    function initMap() {
-        //map..
-        var map = new google.maps.Map(document.getElementById('dvMap'),  {
-            center: {
-                lat: @Model.Restaurant.Latitude,
-                lng: @Model.Restaurant.Longitude
-            },
-            zoom: 15,
-            scrollwheel: true
-        });
-        //marker..
-        var marker = new google.maps.Marker({
-            position: {
-                lat: @Model.Restaurant.Latitude,
-                lng: @Model.Restaurant.Longitude
-            },
-            map: map,
-            draggable: true
-        });
-
-        //dragend event of marker
-        google.maps.event.addListener(marker,
-            'dragend',
-            function() {
-                var lat = marker.getPosition().lat();
-                var lng = marker.getPosition().lng();
-
-                $('#lat').val(lat);
-                $('#lng').val(lng);
-
-                if (@Model.Restaurant.Id > 0) {
-                    window.open( @Model.Restaurant.Id, "_self");
-                } else {
-                    window.open("/Restaurants/Edit/0/" + lat + "/" + lng, "_self");
-                }
-
+@if (Model.Restaurant.Latitude != null)
+{
+    <script type="text/javascript">
+        function initMap() {
+            //map..
+            var map = new google.maps.Map(document.getElementById('dvMap'),  {
+                center: {
+                    lat: @Model.Restaurant.Latitude,
+                    lng: @Model.Restaurant.Longitude
+                },
+                zoom: 15,
+                scrollwheel: true
             });
-    }
+            //marker..
+            var marker = new google.maps.Marker({
+                position: {
+                    lat: @Model.Restaurant.Latitude,
+                    lng: @Model.Restaurant.Longitude
+                },
+                map: map,
+                draggable: true
+            });
+
+            //dragend event of marker
+            google.maps.event.addListener(marker,
+                'dragend',
+                function() {
+                    var lat = marker.getPosition().lat();
+                    var lng = marker.getPosition().lng();
+
+                    $('#lat').val(lat);
+                    $('#lng').val(lng);
+
+                    if (@Model.Restaurant.Id > 0) {
+                        window.open( @Model.Restaurant.Id, "_self");
+                    } else {
+                        window.open("/Restaurants/Edit/0/" + lat + "/" + lng, "_self");
+                    }
+
+                });
+        }
+    </script>  }
+else
+{
+<script type="text/javascript">
+        function initMap() {
+            //map..
+            var map = new google.maps.Map(document.getElementById('dvMap'),  {
+                center: {
+                    lat: 54.52023312072917,
+                    lng: 18.53776116646959
+                },
+                zoom: 15,
+                scrollwheel: true
+            });
+
+            var marker = new google.maps.Marker({
+                position: {
+                    lat: 54.52023312072917,
+                    lng: 18.53776116646959
+                },
+                map: map,
+                draggable: true
+            });
+            //dragend event of marker
+            google.maps.event.addListener(marker,
+                'dragend',
+                function() {
+                    var lat = marker.getPosition().lat();
+                    var lng = marker.getPosition().lng();
+
+                    $('#lat').val(lat);
+                    $('#lng').val(lng);
+                    if (@Model.Restaurant.Id > 0) {
+                        window.open( @Model.Restaurant.Id, "_self");
+                    } else {
+                        window.open("/Restaurants/Edit/0/" + lat + "/" + lng, "_self");
+                    }
+
+                });
+        }
 </script>
+}

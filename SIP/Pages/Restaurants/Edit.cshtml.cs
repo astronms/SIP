@@ -10,10 +10,12 @@ using Microsoft.AspNetCore.Http;
 using System.Web;
 using System.Collections.Specialized;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Options;
 
 namespace SIP.Pages.Restaurants
 {
-   /* [Authorize(Roles = "Menager")]*/
+
+    // [Authorize(Roles = "Menager")]
     public class editModel : PageModel
     {
         private readonly IRestaurantData _restaurantData;
@@ -66,7 +68,7 @@ namespace SIP.Pages.Restaurants
             }
 
             _restaurantData.Commit();
-            TempData["Message"] = "Zapisano Restauracjê!";
+            TempData["Message"] = "Zapisano RestauracjÃª!";
             return RedirectToPage("./Detail", new { restaurantId = Restaurant.Id });
         }
 

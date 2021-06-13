@@ -10,16 +10,16 @@ using SIP;
 namespace SIP.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210608205823_08-06-2021")]
-    partial class _08062021
+    [Migration("20210612162217_tet1")]
+    partial class tet1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.2");
+                .HasAnnotation("ProductVersion", "5.0.7")
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -53,7 +53,7 @@ namespace SIP.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -142,7 +142,7 @@ namespace SIP.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -226,7 +226,7 @@ namespace SIP.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("RestaurantId")
                         .HasColumnType("int");
@@ -246,9 +246,15 @@ namespace SIP.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address")
+                    b.Property<string>("AdressURL")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CityCode")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
@@ -256,23 +262,57 @@ namespace SIP.Migrations
 
                     b.Property<string>("Latitude")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("Longitude")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(80)
                         .HasColumnType("nvarchar(80)");
 
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("Rating")
                         .HasColumnType("float");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.ToTable("Restaurants");
+                });
+
+            modelBuilder.Entity("SIP.Data.Restaurants.RestaurantHours", b =>
+                {
+                    b.Property<int>("DayId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CloseHour")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OpenHour")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RestaurantId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DayId");
+
+                    b.HasIndex("RestaurantId");
+
+                    b.ToTable("RestaurantHours");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -333,6 +373,18 @@ namespace SIP.Migrations
                         .HasForeignKey("RestaurantId");
 
                     b.Navigation("Restaurant");
+                });
+
+            modelBuilder.Entity("SIP.Data.Restaurants.RestaurantHours", b =>
+                {
+                    b.HasOne("SIP.Data.Restaurants.Restaurant", null)
+                        .WithMany("Hours")
+                        .HasForeignKey("RestaurantId");
+                });
+
+            modelBuilder.Entity("SIP.Data.Restaurants.Restaurant", b =>
+                {
+                    b.Navigation("Hours");
                 });
 #pragma warning restore 612, 618
         }
