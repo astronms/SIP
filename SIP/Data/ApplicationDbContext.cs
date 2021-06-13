@@ -9,6 +9,7 @@ namespace SIP
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<RestaurantHours> RestaurantHours { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

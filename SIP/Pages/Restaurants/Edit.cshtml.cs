@@ -14,6 +14,7 @@ using Microsoft.Extensions.Options;
 
 namespace SIP.Pages.Restaurants
 {
+
     // [Authorize(Roles = "Menager")]
     public class editModel : PageModel
     {
@@ -67,7 +68,7 @@ namespace SIP.Pages.Restaurants
             }
 
             _restaurantData.Commit();
-            TempData["Message"] = "Zapisano Restauracjê!";
+            TempData["Message"] = "Zapisano RestauracjÃª!";
             return RedirectToPage("./Detail", new { restaurantId = Restaurant.Id });
         }
 

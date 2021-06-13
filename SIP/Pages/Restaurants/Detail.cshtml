@@ -3,6 +3,8 @@
 @{
 }
 <h2>@Model.Restaurant.Name</h2>
+
+
 <table class="table">
     <thead>
         <tr>
@@ -97,35 +99,23 @@
             <td>Opis: @Model.Restaurant.Description</td>
         </tr>
         <tr>
-            <td>Strona: <a href="@Model.Restaurant.AdressURL">@Model.Restaurant.Name</td>
+            <td>Ocena: @Model.Restaurant.Rating</td>
         </tr>
         <tr>
-            <td>Ocena: @Model.RestaurantRate / @Model.RestaurantNumberOfRates</td>
-            <td>
-                @if (Model.IsUserLogged)
-                {
-                    <form method="post">
-                        <input type="hidden" asp-for="Rating.Id" />
-                        <input type="hidden" asp-for="Rating.RestaurantId" />
-                        <input type="hidden" asp-for="Rating.UserId" />
-
-                        <select asp-for="Rating.Score">
-                            <option value="0">Ocena</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-
-                        <button type="submit" class="btn btn-primary">Dodaj</button>
-                    </form>
-                }
-            </td>
+            <td>Strona: <a href="@Model.Restaurant.AdressURL">@Model.Restaurant.Name</td>
         </tr>
-       
     </tbody>
 </table>
+<div>
+    <a href="" id="fb_share"><img src="https://1.bp.blogspot.com/-Oycat4R9GuE/XHguPKA2ABI/AAAAAAAAIHU/6FiEpQI0oLQkRjqhXh_gITbSwLFFldwLACK4BGAYYCw/s1600/icon%2Bshare%2Bfacebook.png" style="width:80px;height:28px;"/></a>
+
+    <script>
+        window.onload = function () {
+            fb_share.href = 'http://www.facebook.com/share.php?u=' + encodeURIComponent(location.href);
+        }
+    </script>
+</div>
+
 
 <div>
     <div class="text-center">
@@ -134,62 +124,102 @@
 
         <div id="googleMap" style="height:500px;width:100%;"></div>
         <script>
-
-                        function myMap() {
-                            var myCenter = new google.maps.LatLng(@Model.Restaurant.Latitude, @Model.Restaurant.Longitude);
+            function myMap() {
+                var myCenter = new google.maps.LatLng(@Model.Restaurant.Latitude, @Model.Restaurant.Longitude);
                             var mapProp = { center: myCenter, zoom: 16, scrollwheel: true, draggable: true, mapTypeId: google.maps.MapTypeId.ROADMAP };
                             var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
                             var marker = new google.maps.Marker({ position: myCenter });
                             marker.setMap(map);
+               @* const directionsService = new google.maps.DirectionsService();
+                const directionsRenderer = new google.maps.DirectionsRenderer({
+                    draggable: true,
+                    map,
+                    panel: document.getElementById("right-panel"),
+                });
+                directionsRenderer.addListener("directions_changed", () => {
+                    computeTotalDistance(directionsRenderer.getDirections());
+                });
+
+                displayRoute(
+                    @Model.Lat,
+                    myCenter,
+                    directionsService,
+                    directionsRenderer
+                );*@
+            }
+
+@*
+            function getDirection(map, latLng) {
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: latLng,
+                    draggable: true
+                });
+                var Lat = latLng.lat();
+                var Lng = latLng.lng();
+
+            }
+
+            function displayRoute(origin, destination, service, display) {
+                service.route(
+                    {
+                        origin: origin,
+                        destination: destination,
+                        travelMode: google.maps.TravelMode.DRIVING,
+                        avoidTolls: true,
+                    },
+                    (result, status) => {
+                        if (status === "OK" && result) {
+                            display.setDirections(result);
+                        } else {
+                            alert("Could not display directions due to: " + status);
                         }
+                    }
+                );
+            }
+
+            function computeTotalDistance(result) {
+                let total = 0;
+                const myroute = result.routes[0];
+
+                if (!myroute) {
+                    return;
+                }
+
+                for (let i = 0; i < myroute.legs.length; i++) {
+                    total += myroute.legs[i].distance.value;
+                }
+                total = total / 1000;
+                document.getElementById("total").innerHTML = total + " km";
+            }*@
+
+
         </script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7inDNHeEHrSM8D1V3ENK3ATX5uuYM_nw&callback=myMap"></script>
+
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7inDNHeEHrSM8D1V3ENK3ATX5uuYM_nw&callback=myMap"></script>
 
     </div>
 
 </div>
-
 @if (Model.Message != null)
 {
     <div class="alert alert-secondary">@Model.Message</div>
 }
 
+<form method="post" target="_blank">
+    <div class="form-group">
+        <label asp-for="@Model.Lng">Długość Geograficzna</label>
+        <input asp-for="@Model.Lng" class="form-control" />
+        <span class="text-danger" asp-validation-for="@Model.Lng"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Lat">Szerokość Geograficzna</label>
+        <input asp-for="@Model.Lat" class="form-control"/>
+        <span class="text-danger" asp-validation-for="@Model.Lat"></span>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Wyznacz trasę</button>
+</form>
+
 <a asp-page="./List" class="btn btn-light">Powrót do wszystkich restauracji.</a>
 
-@if (Model.IsUserLogged)
-{
-    <form method="post">
-        <input type="hidden" asp-for="Comment.Id" />
-        <input type="hidden" asp-for="Comment.UserName" />
-        <input type="hidden" asp-for="Comment.RestaurantId" />
-
-        <div class="form-group">
-            <label asp-for="Comment.Text">Dodaj Komentarz:</label>
-            <input asp-for="Comment.Text" class="form-control" />
-            <span class="text-danger" asp-validation-for="Comment.Text"></span>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Dodaj</button>
-    </form>
-}
-
-
-@if (Model.Comments.Count() > 0)
-{
-    <table class="table">
-
-        <thead>
-            <tr>
-                <td>Uzytkownik</td>
-                <td>Komentarz</td>
-            </tr>
-        </thead>
-        @foreach (var comment in Model.Comments)
-        {
-            <tr>
-                <td>@comment.UserName</td>
-                <td>@comment.Text</td>
-            </tr>
-        }
-    </table>
-}
