@@ -33,5 +33,6 @@ namespace SIP.Data.Restaurants
         public string Description { get; set; }
         public double Rating { get; set; }
         public string AdressURL { get; set; }
+
     }
 }

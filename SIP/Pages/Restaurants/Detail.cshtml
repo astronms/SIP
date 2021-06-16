@@ -1,4 +1,5 @@
 ﻿@page "{restaurantId:int}"
+@using SIP.Data.Restaurants
 @model SIP.Pages.Restaurants.DetailModel
 @{
 }
@@ -227,20 +228,7 @@
     <div class="alert alert-secondary">@Model.Message</div>
 }
 
-<form method="post" target="_blank">
-    <div class="form-group">
-        <label asp-for="@Model.Lng">Długość Geograficzna</label>
-        <input asp-for="@Model.Lng" class="form-control" />
-        <span class="text-danger" asp-validation-for="@Model.Lng"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="@Model.Lat">Szerokość Geograficzna</label>
-        <input asp-for="@Model.Lat" class="form-control" />
-        <span class="text-danger" asp-validation-for="@Model.Lat"></span>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Wyznacz trasę</button>
-</form>
+<a href="@Html.Raw("http://maps.google.com/maps?daddr="+Model.Restaurant.Latitude+","+Model.Restaurant.Longitude)" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Wyznacz trasę</a>
 
 @if (Model.IsUserLogged)
 {

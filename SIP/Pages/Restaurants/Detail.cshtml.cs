@@ -72,10 +72,7 @@ namespace SIP.Pages.Restaurants
             {
                 return Page();
             }
-            if(Restaurant.Latitude != "" && Restaurant.Longitude != "")
-                return Redirect("http://maps.google.com/maps?saddr=" + Lat + "," + Lng +
-                            "&daddr=" + Restaurant.Latitude + "," + Restaurant.Longitude);
-            else if (Comment.Text != null)
+            if (Comment.Text != null)
             {
                 _commentData.Add(Comment);
                 _commentData.Commit();

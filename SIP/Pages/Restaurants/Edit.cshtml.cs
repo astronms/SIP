@@ -10,12 +10,13 @@ using Microsoft.AspNetCore.Http;
 using System.Web;
 using System.Collections.Specialized;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 
 namespace SIP.Pages.Restaurants
 {
-
-    // [Authorize(Roles = "Menager")]
+    [Authorize]
+    //[Authorize(Roles = "Menager")]
     public class editModel : PageModel
     {
         private readonly IRestaurantData _restaurantData;
